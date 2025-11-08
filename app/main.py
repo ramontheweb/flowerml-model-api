@@ -143,12 +143,15 @@ async def get_examples():
 print("✅ FastAPI application created successfully!")
 print("📚 API documentation will be available at: http://localhost:8000/docs")
 
+
 # This allows running with: python app/main.py
 if __name__ == "__main__":
+    import os
+    port = int(os.getenv("PORT", 8000))  # Railway provides PORT environment variable
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="0.0.0.0",
-        port=8000,
-        reload=True,  # Auto-reload on code changes
+        port=port,
+        reload=False,  # Set to False in production
         log_level="info"
     )
